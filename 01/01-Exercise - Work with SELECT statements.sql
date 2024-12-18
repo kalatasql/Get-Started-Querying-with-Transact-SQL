@@ -10,10 +10,10 @@ FROM SalesLT.Customer;
 --Create a list of all customer contact names that includes the title, first name, middle name (if any), last name, and suffix (if any) of all customers.
 
 SELECT [Title], 
-	   [FirstName], 
-	   [MiddleName], 
-	   [LastName], 
-	   [Suffix] 
+       [FirstName], 
+       [MiddleName], 
+       [LastName], 
+       [Suffix] 
 FRom SalesLT.Customer;
 
 --3. Retrieve customer names and phone numbers
@@ -23,8 +23,8 @@ FRom SalesLT.Customer;
 --The customer’s phone number.
 
 SELECT [Salesperson],  
-	   ISNULL(Title + ' ', '') + LastName AS CustomerName2,
-	   [Phone]
+        ISNULL(Title + ' ', '') + LastName AS CustomerName,
+       [Phone]
 FROM SalesLT.Customer;
 
 --Challenge 2: 
@@ -42,7 +42,7 @@ FROM SalesLT.Customer
 -- The order date converted to ANSI standard 102 format (yyyy.mm.dd – for example 2015.01.31).
 
 SELECT 
-	  '*' + PurchaseOrderNumber + ' ' + '(' + CAST([RevisionNumber] AS NVARCHAR(10)) + ')*' AS [Purchase Order and revision number],
+	  '*' + PurchaseOrderNumber + ' (' + CAST([RevisionNumber] AS NVARCHAR(10)) + ')*' AS [Purchase Order and revision number],
 	  CONVERT(NVARCHAR(30), OrderDate, 102) AS [Formatted Order Date] 
 FROM SalesLT.SalesOrderHeader
 
@@ -68,7 +68,7 @@ FROM SalesLT.Customer
 --and a second column named PrimaryContact that contains the email address if known, and otherwise the phone number.
 
 SELECT CustomerID,
-	   COALESCE(EmailAddress, Phone) AS [PrimaryContact]
+       COALESCE(EmailAddress, Phone) AS [PrimaryContact]
 FROM SalesLT.Customer
 
 --IMPORTANT: In the sample data provided, there are no customer records without an email address. 
@@ -90,8 +90,8 @@ SELECT [SalesOrderID],
 	   [DueDate], 
 	   [ShipDate],
 	   (CASE 
-			WHEN (ShipDate IS NOT NULL) THEN 'Shipped'
-			ELSE 'Awaiting Shipment'
+		WHEN (ShipDate IS NOT NULL) THEN 'Shipped'
+		ELSE 'Awaiting Shipment'
 	    END) AS ShippingStatus
 FROM SalesLT.SalesOrderHeader
 
