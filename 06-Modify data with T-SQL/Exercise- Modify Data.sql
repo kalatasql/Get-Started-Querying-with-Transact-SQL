@@ -103,10 +103,10 @@
 --the records from the tables in the correct order to avoid a foreign-key constraint violation.
 
 DELETE FROM SalesLT.Product 
-WHERE ProductCategoryID = (select ProductCategoryID 
-						   from   SalesLT.ProductCategory
-						   WHERE  Name = 'Bells and Horns')
-						   
+WHERE ProductCategoryID = (SELECT ProductCategoryID 
+			   FROM   SalesLT.ProductCategory
+			   WHERE  Name = 'Bells and Horns')
 
+	
 DELETE FROM SalesLT.ProductCategory 
 WHERE Name = 'Bells and Horns'
