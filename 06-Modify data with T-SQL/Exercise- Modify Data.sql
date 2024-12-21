@@ -110,3 +110,14 @@ WHERE ProductCategoryID = (SELECT ProductCategoryID
 	
 DELETE FROM SalesLT.ProductCategory 
 WHERE Name = 'Bells and Horns'
+	
+--## Solution to delete 'Bells and Horns' Category
+--This solution deletes a product category named 'Bells and Horns' from the `SalesLT.ProductCategory` table. 
+--To prevent accidental deletion of multiple records with the same name, the `ProductCategoryID` is used to ensure only the latest record is deleted.
+
+DELETE FROM SalesLT.ProductCategory
+WHERE ProductCategoryID = 
+    (SELECT TOP(1) ProductCategoryID 
+     FROM SalesLT.ProductCategory 
+     WHERE Name = 'Bells and Horns' 
+     ORDER BY ProductCategoryID DESC);
